@@ -14,6 +14,10 @@ public class Greeting {
 
     Clock clock = new DefaultClock();
 
+    void setClock(Clock clock) {
+        this.clock = clock;
+    }
+
     public String greet() {
         int hour = clock.getHour();
         if (5 <= hour && hour <= 9) {

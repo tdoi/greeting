@@ -1,24 +1,20 @@
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 
 public class GreetingTest extends BaseMockTest {
 
-    @Mock
-    private Greeting.Clock clock;
-
-    @InjectMocks
-    private Greeting greeting;
+    private Greeting greeting = new Greeting();
 
     @Test
     public void test_goodMorning() {
-        when(clock.getHour()).thenReturn(8);
+        greeting.setClock(new Greeting.Clock() {
+            @Override
+            public int getHour() {
+                return 8;
+            }
+        });
 
         String message = greeting.greet();
 
@@ -27,7 +23,12 @@ public class GreetingTest extends BaseMockTest {
 
     @Test
     public void test_goodEvening() {
-        when(clock.getHour()).thenReturn(20);
+        greeting.setClock(new Greeting.Clock() {
+            @Override
+            public int getHour() {
+                return 20;
+            }
+        });
 
         String message = greeting.greet();
 
